@@ -1,11 +1,11 @@
 <?php    
-    class ModeloInventario{        
-        private $ModeloInventario;
+    class ModeloRegistro{        
+        private $ModeloRegistro;
         private $cnx;
         private $datos;
         public function __construct(){
-            require dirname(__FILE__).'/../config.php';
-            $this->ModeloInventario = array();
+            require_once dirname(__FILE__).'/../config.php';
+            $this->ModeloRegistro = array();
             $this->cnx = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
         }
         public function crearTabla($tabla, $columnas){
