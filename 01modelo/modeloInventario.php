@@ -1,12 +1,12 @@
 <?php    
-    class Modelo{        
-        private $Modelo;
+    class ModeloInventario{        
+        private $ModeloInventario;
         private $cnx;
         private $datos;
         public function __construct(){
-            require dirname(__FILE__).'/dtcnx.php';
-            $this->Modelo = array();
-            $this->cnx = new mysqli($host, $user, $password, $dbname, $port, $socket);	
+            require dirname(__FILE__).'/config.php';
+            $this->ModeloInventario = array();
+            $this->cnx = new mysqli($host, $usuario, $contrasena, $dbname, $port, $socket);	
         }
         public function crearTabla($tabla, $columnas){
             $consulta='CREATE TABLE IF NOT EXISTS '.$tabla.'(
