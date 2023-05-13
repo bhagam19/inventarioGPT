@@ -1,1 +1,8 @@
 config.php
+.tmp.drivedownload/*
+.gitignore
+.vscode/*
+appsConexion/*
+conexion/*
+dtcnx.php
+*.json
