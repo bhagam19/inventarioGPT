@@ -8,13 +8,13 @@ try {
     // Creación de una nueva instancia de la clase ControladorInventario
     $ControladorInventario = new ControladorInventario();
     // Verificación de la instalación
-    $instalacionVerificada = $ControladorInventario->verificarInstalacion();
-    // Si la instalación no está verificada, se procede a instalar
-    if ($instalacionVerificada === NULL) {
-        $modeloController->instalar();
+    $instalacionVerificada = $ControladorInventario->verificarInstalacion();    
+    if ($instalacionVerificada===false) {
+        // Si la instalación no está verificada, se procede a instalar
+        $ControladorInventario->instalar();
     } else {
         // Si la instalación está verificada, se muestra la página de inicio
-        $modeloController->index();
+        $ControladorInventario->index();
     }
 } catch (Exception $e) {
     // Manejo de errores

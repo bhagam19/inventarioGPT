@@ -4,9 +4,9 @@
         private $cnx;
         private $datos;
         public function __construct(){
-            require dirname(__FILE__).'/config.php';
+            require dirname(__FILE__).'/../config.php';
             $this->ModeloInventario = array();
-            $this->cnx = new mysqli($host, $usuario, $contrasena, $dbname, $port, $socket);	
+            $this->cnx = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
         }
         public function crearTabla($tabla, $columnas){
             $consulta='CREATE TABLE IF NOT EXISTS '.$tabla.'(

@@ -1,5 +1,5 @@
 <?php
-    require_once dirname(__FILE__).'/01modelo/modeloInventario.php';
+    require_once dirname(__FILE__).'/../01modelo/modeloInventario.php';
     class ControladorInventario{
         private $ModeloInventario;
         private $dato;
@@ -7,16 +7,24 @@
             $this->ModeloInventario =new ModeloInventario();	
         } 
         static function verificarInstalacion(){
+            $cnx = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+            $resultado = $cnx->query("SHOW TABLES LIKE 'instalacion'");
+            $existeTabla = $resultado->num_rows > 0;
+            $cnx->close();    
+            return $existeTabla;
+
+            /*
             $tabla='information_schema.tables';
             $condicion='table_schema="id19696923_sinsimat" AND table_name="instalacion"';
             $registro=new ModeloInventario();
             $dato=$registro->mostrar($tabla,$condicion);            
             return $dato;
+            */
         }
         static function instalar(){
             require('adm/01-mdl/headerInstallBD.php');
             require('adm/01-mdl/contenidoInstalacion.php');
-            $registro=new Modelo();
+            $registro=new ModeloInventario();
             foreach($datos as $tabla=>$columnas){
                 $dato=$registro->crearTabla($tabla,$columnas); 
             }
@@ -37,7 +45,7 @@
         }
         static function validarLogin($tabla,$usuario,$contrasena){
             $condicion ='dane='.$usuario;
-            $registro=new Modelo();
+            $registro=new ModeloInventario();
             $dato= $registro->mostrar($tabla,$condicion);
             $respuesta="";
             if($dato===NULL){       
@@ -67,36 +75,36 @@
         static function cargarUsuarioActivo(){
             $tabla='usuarios';
             $condicion='dane='.$_SESSION['usuario'];
-            $registro=new Modelo();
+            $registro=new ModeloInventario();
             $dato= $registro->mostrar($tabla,$condicion);
             return $dato;            
         }        
         static function consultar($tabla,$condicion){
-            $registro=new Modelo();
+            $registro=new ModeloInventario();
             $dato= $registro->mostrar($tabla,$condicion);
             return $dato;
         }
         static function consultarJoin($columnas,$tabla1,$tipoJoin,$tabla2,$On,$condicion){
-            $registro=new Modelo();
+            $registro=new ModeloInventario();
             $dato= $registro->mostrarJoin($columnas,$tabla1,$tipoJoin,$tabla2,$On,$condicion);
             return $dato;
         }
         static function consultarDistinct($columna,$tabla,$condicion){
-            $registro=new Modelo();
+            $registro=new ModeloInventario();
             $dato= $registro->mostrarDistinct($columna, $tabla,$condicion);
             return $dato;
         }
         static function insertarDatos($tabla,$valores){
-            $registro=new Modelo();
+            $registro=new ModeloInventario();
             $registro->insertarValores($tabla,$valores);
 
         }
         static function borrarDatos($tabla,$condicion){
-            $registro=new Modelo();
+            $registro=new ModeloInventario();
             $registro->borrar($tabla,$condicion);
         }
         static function volverEnumerar($tabla){
-            $registro=new Modelo();
+            $registro=new ModeloInventario();
             $registro->volverEnumerar($tabla);
         }
     }
